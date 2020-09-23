@@ -1,0 +1,98 @@
+<div class="container">
+  <form >
+       <div class="ui-g">
+         <div>
+           <h1>Novo Pessoa</h1>
+         </div>
+       </div>
+
+       <div class=" ui-g-12  ui-md-12  ui-fluid">
+        <label >Nome</label>
+        <input pInputText type="text" name="nome"
+        ngModel #nome="ngModel" required minlength="3">
+         <!-- Modelo novo como includ de menssagem-->
+          <app-messagem [control]="nome" error="required"
+         text="Informe uma nome"
+         ></app-messagem>
+
+         <app-messagem [control]="nome" error="minlength"
+         text=" Minimo de {{nome.errors?.minlength?.requiredLength}} caracretes"
+         ></app-messagem>
+       </div>
+
+         <div class="ui-g-12  ui-md-8 ui-fluid">
+           <label >Logradouro</label>
+           <input pInputText type="text" name="logradouro" ngModel #logradouro="ngModel" required>
+
+         <!-- Modelo novo como includ de menssagem-->
+           <app-messagem [control]="logradouro" error="required"
+         text="Informe uma Logradouro"
+         ></app-messagem>
+         </div>
+
+        <div class="ui-g-12 ui-md-4 ui-fluid">
+          <label >Número</label>
+          <input pInputText type="text" name="numero" ngModel #numero="ngModel" required>
+
+           <!-- Modelo novo como includ de menssagem-->
+        <app-messagem [control]="numero" error="required"
+         text="Informe uma numero"
+         ></app-messagem>
+       </div>
+
+
+       <div class="ui-g-12 ui-md-5 ui-fluid">
+        <label >Complemento</label>
+        <input pInputText type="text" >
+
+     </div>
+
+     <div class="ui-g-12  ui-md-4 ui-fluid">
+       <label >Barrio</label>
+       <input pInputText type="text" ngModel name="bairro" #bairro="ngModel" required>
+
+        <!-- Modelo novo como includ de menssagem-->
+     <app-messagem [control]="bairro" error="required"
+        text="Informe uma bairro"
+        ></app-messagem>
+    </div>
+
+    <div class="ui-g-12  ui-md-3 ui-fluid">
+      <label >CEP</label>
+      <p-inputMask  mask="999.999-999" ngModel name="cep" #cep="ngModel" required></p-inputMask>
+
+       <!-- Modelo novo como includ de menssagem-->
+       <app-messagem [control]="cep" error="required"
+       text="Informe uma cep"
+       ></app-messagem>
+    </div>
+
+      <div class="ui-g-12  ui-md-3 ui-fluid">
+        <label >Cidade</label>
+        <input pInputText type="text" name="cidade" ngModel #cidade="ngModel" required>
+
+         <!-- Modelo novo como includ de menssagem-->
+        <app-messagem [control]="cidade" error="required"
+         text="Informe uma cidade"
+         ></app-messagem>
+      </div>
+     <div class="ui-g-12 ui-md-3 ui-fluid">
+      <label >Estado</label>
+      <input pInputText type="text" name="estado"  ngModel required #estado="ngModel" >
+
+       <!-- Modelo novo como includ de menssagem-->
+       <app-messagem [control]="estado" error="required"
+       text="Informe uma estado"
+       ></app-messagem>
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton type="submit" label="Salvar" style="margin: 0 15px;" class="ui-button-success"></button>
+      <button pButton type="button" label="Novo" class="ui-button-info"></button>
+        <a  style="margin: 0 15px;">Volta Para a Pesquisar</a>
+    </div>
+
+
+
+  </form>
+</div>

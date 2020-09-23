@@ -1,0 +1,85 @@
+<div class="container">
+  <form autocomplete="off">
+       <div class="ui-g">
+         <div>
+           <h1>Novo Laçamento</h1>
+         </div>
+       </div>
+       <div class="row ui-g-12  " style="margin: 0 15px;">
+        <p-selectButton [options]="tipos" #tipo></p-selectButton>
+       </div>
+
+         <div class="ui-g-6  ui-md-3 ui-fluid">
+           <label >Vencimento</label>
+            <p-calendar  [showIcon]="true" dateFormat="dd/mm/yy"
+            name="vencimento" #vencimento="ngModel" ngModel  required></p-calendar>
+
+           <app-messagem [control]="vencimento" error="required"
+            text="Informe uma vencimento"
+            ></app-messagem>
+
+        </div>
+
+        <div class="ui-g-6 ui-md-3 ui-fluid">
+          <label >{{tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento' }}</label>
+          <p-calendar  [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
+       </div>
+
+       <div class="ui-g-12 ui-md-9 ui-fluid">
+        <label >Descrição</label>
+        <input pInputText type="text"  name="descricao"
+        ngModel #descricao="ngModel" required minlength="5" >
+
+        <!-- Modelo novo como includ de menssagem-->
+        <app-messagem [control]="descricao" error="required"
+        text="Informe uma descrição"
+        ></app-messagem>
+
+        <app-messagem [control]="descricao" error="minlength"
+        text=" Minimo de {{descricao.errors?.minlength?.requiredLength}} caracretes"
+        ></app-messagem>
+
+        <!-- Modelo velhor de menssagem
+        <div *ngIf="descricao.hasError('required') && descricao.dirty"
+        class="ui-messagem ui-messagem-error">
+        informe uma descrição. Você digitou apenas {{descricao.errors.minlength.actualLength}}
+
+        </div>
+
+        <div *ngIf="descricao.hasError('minlength') && descricao.dirty"
+        class="ui-messagem ui-messagem-error">
+            Minimo de {{descricao.errors.minlength.requiredLength}} caracretes
+        </div>
+      -->
+     </div>
+
+     <div class="ui-g-12  ui-md-3 ui-fluid">
+       <label >Valor</label>
+       <input pInputText type="text" placeholder="0,00"  currencyMask  name="valor" ngModel
+        [options]="{ prefix: ' ', thousands: '.', decimal: ',',allowNegative: false }">
+    </div>
+
+    <div class="ui-g-12  ui-md-6 ui-fluid">
+      <label >Categoria</label>
+      <p-dropdown [options]="categoria" placeholder="Selecione" [autoWidth] = false [filter]="true" ></p-dropdown>
+    </div>
+      <div class="ui-g-12  ui-md-6 ui-fluid">
+        <label >Pessoa</label>
+        <p-dropdown [options]="pessoa"  placeholder="Selecione" [autoWidth] = false [filter]="true" ></p-dropdown>
+     </div>
+
+     <div class="ui-g-12 ui-fluid">
+      <label >Observação</label>
+      <textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton type="submit" label="Salvar" style="margin: 0 15px;" class="ui-button-success"></button>
+      <button pButton type="button" label="Novo" class="ui-button-info"></button>
+        <a  style="margin: 0 15px;">Volta Para a Pesquisar</a>
+    </div>
+
+
+
+  </form>
+</div>

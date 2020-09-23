@@ -1,0 +1,85 @@
+
+<form autocomplete="off" (ngSubmit)="pesqusar()">
+    <div class="container">
+        <div class="ui-g">
+
+            <div class="ui-g-12">
+              <h1>pessoa</h1>
+            </div>
+              <div class="ui-g-12 ui-fluid">
+                    <label >Descrição</label>
+                  <input type="text" name="descricao" pInputText
+                  [(ngModel)]="filtro.dataVencimeto"
+                  />
+              </div>
+
+            <div class="ui-g-12">
+                <label style="display: block;">Vencimento</label>
+                <p-calendar  [showIcon]="true" dateFormat="dd/mm/yy" style="width: 95px;"
+                name="dataVencimeto"  [(ngModel])="filtro.dataVencimeto"  required></p-calendar>
+
+                <label >Ate</label>
+                <p-calendar  [showIcon]="true" dateFormat="dd/mm/yy" style="width: 95px;"
+                name="dataPagamento"  [(ngModel)]="filtro.dataPagamento"  required></p-calendar>
+
+              </div>
+        </div>
+
+  <div class="ui-g-12">
+      <button pButton type="submit" label="Pesquisar" ></button>
+  </div>
+
+
+  <h3 class="first">Basic</h3>
+  <p-table [value]="pessoa" [responsive]= "true"
+  emptyMessage="Nenhum Lançamento encontrado"
+  [paginator]="true" [rows]="filtro.itensPorPagina"
+  [lazy]="true" [totalRecords]="totalRegistro"
+  (onLazyLoad)="aoMudarPagina($event)">
+      <ng-template pTemplate="header">
+          <tr>
+              <th>Tipo</th>
+              <th>data Vencimeto </th>
+              <th>descricao</th>
+              <th>data Pagamento</th>
+              <th>Pessoa</th>
+              <th>Valor</th>
+              <th></th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-pessoa>
+          <tr>
+              <td>{{pessoa.tipo}}</td>
+              <td class="col-ata"   >{{pessoa.dataVencimeto}}</td>
+              <td>{{pessoa.descricao}}</td>
+              <td class="col-data"  >{{pessoa.dataPagamento}}</td>
+              <td>{{pessoa.pessoa}}</td>
+              <td>{{pessoa.valor}}</td>
+
+              <td style="col-acoes">
+
+                      <a href=""  pButton icon="fa-pencil"  pTooltip="botao editar" iconPos="left" tooltipPosition="top">editar</a>
+                      <button pButton icon="fa-trash" pTooltip="botao lixo" tooltipPosition="top">lixo</button>
+              </td>
+
+              <!--  para ver o teste
+              <ng-template let-lanc="rowData" pTemplate="body">
+                <td>                  [style.color]="color:  lanc.tipo === 'DESPESA' ? 'red' : 'blue'"
+              <span class="col-valor" [ngStyle]="{color:  lanc.tipo === 'DESPESA' ? 'red' : 'blue'} ">
+                {{lancamentos.valor}}</span>
+              </td>
+            </ng-template>
+            </tr>  -->
+
+
+
+          </tr>
+      </ng-template>
+
+  </p-table>
+
+    <div class="ui-g-12">
+      <a pButton type="submit" label="Novo Laçamento" ></a>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,97 @@
+<!--<app-navbar> </app-navbar>-->
+
+<div class="container">
+      <div class="ui-g">
+
+        <form autocomplete="off" (ngSubmit)="pesqusar()">
+
+          <div class="ui-g-12">
+            <h1>Lançamento</h1>
+          </div>
+            <div class="ui-g-12 ui-fluid">
+                  <label >Descrição</label>
+                <input pInputText type="text" name="descricao"
+                [(ngModel)]="filtro.descricao"/>
+            </div>
+
+          <div class="ui-g-12">
+              <label style="display: block;">Vencimento</label>
+              <p-calendar  [showIcon]="true" dateFormat="dd/mm/yy" style="width: 95px;"
+            name="dataVencimentoInicio"  [(ngModel])="filtro.dataVencimentoInicio"  required></p-calendar>
+
+              <label >Ate</label>
+              <p-calendar  [showIcon]="true" dateFormat="dd/mm/yy" style="width: 95px;"
+               name="filtro.dataVencimentoFim"  [(ngModel)]="dataVencimentoFim"  required></p-calendar>
+
+            </div>
+          </form>
+      </div>
+
+<div class="ui-g-12">
+    <button pButton type="submit" label="Pesquisar" ></button>
+</div>
+
+<!--  a qui é usando como se fose um include
+   <app-lancamentos-grid-componet [lancamentos]="lancamentos" ></app-lancamentos-grid-componet>
+-->
+
+
+  <div class="ui-g">
+ <div class="ui-g-12">
+<p-table [value]="lancamentos" [responsive]= "true"
+   emptyMessage="Nenhum Lançamento encontrado"
+   [paginator]="true" [rows]="filtro.itensPorPagina"
+   [lazy]="true" [totalRecords]="totalRegistro"
+   (onLazyLoad)="aoMudarPagina($event)"
+   #tabela>
+  <ng-template pTemplate="header">
+      <tr>
+          <th>Tipo</th>
+          <th>data Vencimeto </th>
+          <th>descricao</th>
+          <th>data Pagamento</th>
+          <th>Pessoa</th>
+          <th>Valor</th>
+          <th></th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-lancamentos>
+      <tr>
+          <td>{{lancamentos.tipo}}</td>
+          <td class="col-ata"   >{{lancamentos.dataVencimeto}}</td>
+          <td>{{lancamentos.descricao}}</td>
+          <td class="col-data"  >{{lancamentos.dataPagamento}}</td>
+          <td>{{lancamentos.pessoa}}</td>
+          <td>{{lancamentos.valor}}</td>
+
+          <td style="col-acoes">
+            <ng-template let-lanc="rowData" pTemplate="body">
+              <a href=""  pButton icon="fa-pencil"  pTooltip="botao editar" iconPos="left" tooltipPosition="top">editar</a>
+              <button pButton icon="fa-trash" pTooltip="Excluir" tooltipPosition="top"
+              (click)="confirmarExclusao (lanc)"
+              >Escluir</button>
+            </ng-template>
+          </td>
+
+          <!--  para ver o teste
+          <ng-template let-lanc="rowData" pTemplate="body">
+            <td>                  [style.color]="color:  lanc.tipo === 'DESPESA' ? 'red' : 'blue'"
+          <span class="col-valor" [ngStyle]="{color:  lanc.tipo === 'DESPESA' ? 'red' : 'blue'} ">
+            {{lancamentos.valor}}</span>
+          </td>
+        </ng-template>
+         </tr>  -->
+
+
+
+       </tr>
+   </ng-template>
+
+</p-table>
+</div>
+</div>
+
+  <div class="ui-g-12">
+    <a pButton type="submit" label="Novo Laçamento" ></a>
+  </div>
+</div>
